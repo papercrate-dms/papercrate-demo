@@ -105,7 +105,7 @@ services:
       - "${QUICKWIT_PORT:-7280}:7280"
 
   backend:
-    image: ghcr.io/papercrate-dms/papercrate-backend:latest
+    image: ghcr.io/papercrate-dms/papercrate-backend:latest-dev
     depends_on:
       postgres:
         condition: service_healthy
@@ -129,7 +129,7 @@ services:
     restart: unless-stopped
 
   worker:
-    image: ghcr.io/papercrate-dms/papercrate-backend:latest
+    image: ghcr.io/papercrate-dms/papercrate-backend:latest-dev
     depends_on:
       backend:
         condition: service_healthy
@@ -139,7 +139,7 @@ services:
     restart: unless-stopped
 
   webdav:
-    image: ghcr.io/papercrate-dms/papercrate-backend:latest
+    image: ghcr.io/papercrate-dms/papercrate-backend:latest-dev
     depends_on:
       backend:
         condition: service_healthy
@@ -151,7 +151,7 @@ services:
     restart: unless-stopped
 
   frontend:
-    image: ghcr.io/papercrate-dms/papercrate-frontend:latest
+    image: ghcr.io/papercrate-dms/papercrate-frontend:latest-dev
     environment:
       API_PROXY_PASS: http://backend:3000
     depends_on:
@@ -162,7 +162,7 @@ services:
     restart: unless-stopped
 
   migrator:
-    image: ghcr.io/papercrate-dms/papercrate-backend:latest
+    image: ghcr.io/papercrate-dms/papercrate-backend:latest-dev
     depends_on:
       postgres:
         condition: service_healthy
